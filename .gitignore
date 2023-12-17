@@ -39,3 +39,6 @@ Testing/
 *.exe
 *.out
 *.app
+
+tensorflowlite/
+!SoDlls/*

@@ -4,7 +4,7 @@ cmake_minimum_required(VERSION 3.16..3.21)
 set(APP_NAME FaceMeshCpp)
 
 # Set 3rd party path
-set(TFLite_PATH "C:/tensorflowlite")
+set(TFLite_PATH "C:/Users/phili/SourceCode/mediapipe_face_iris_cpp/tensorflowlite")
 set(TFLite_INCLUDE_DIRS "${TFLite_PATH}/include")
 set(TFLite_LIBS "${TFLite_PATH}/libs/windows_x86_64/libtensorflowlite.so.if.lib")
 
