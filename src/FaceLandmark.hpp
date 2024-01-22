@@ -13,6 +13,8 @@ namespace my {
     class FaceLandmark : public my::FaceDetection {
         public:
             bool gotRoi {false};
+            mutable int mouse_x {0};
+            mutable int mouse_y {0};
             cv::Rect roi;
             /*
             Users MUST provide the FOLDER contain BOTH the face_detection_short.tflite 

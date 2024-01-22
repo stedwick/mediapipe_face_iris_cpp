@@ -17,7 +17,7 @@ find_package(tensorflowlite REQUIRED)
 # find_package(tabulate REQUIRED)
 
 target_include_directories(${APP_NAME} PUBLIC ${OpenCV_INCLUDE_DIRS} ${tensorflowlite_INCLUDE_DIRS})
-target_link_libraries(${APP_NAME} ${OpenCV_LIBRARIES} ${tensorflowlite_LIBRARIES})
+target_link_libraries(${APP_NAME} "-framework ApplicationServices" ${OpenCV_LIBRARIES} ${tensorflowlite_LIBRARIES})
 
 # Build in multi-process.
 # target_compile_options(${APP_NAME} 

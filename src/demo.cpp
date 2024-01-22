@@ -9,8 +9,21 @@
 #include <chrono>
 #endif
 
+#include <ApplicationServices/ApplicationServices.h>
+// #include <unistd.h>
+
 int main(int argc, char *argv[])
 {
+    CGEventRef eventGet = CGEventCreate(NULL);
+    CGPoint cursor = CGEventGetLocation(eventGet);
+    CFRelease(eventGet);
+    std::cout << cursor.x << ", " << cursor.y << "\n\n";
+
+    CGPoint location = CGPointMake(500, 200);
+    CGEventRef eventSet = CGEventCreateMouseEvent(NULL, kCGEventMouseMoved, location, kCGMouseButtonLeft);
+    CGEventSetType(eventSet, kCGEventMouseMoved);
+    CGEventPost(kCGHIDEventTap, eventSet);
+    CFRelease(eventSet);
 
     my::IrisLandmark irisLandmarker("./models");
     cv::VideoCapture cap(0);

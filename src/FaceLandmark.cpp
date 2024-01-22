@@ -1,6 +1,8 @@
 #include "FaceLandmark.hpp"
 #include <iostream>
 
+#include <ApplicationServices/ApplicationServices.h>
+
 #define FACE_LANDMARKS 468
 /*
 Helper function
@@ -62,7 +64,32 @@ std::vector<cv::Point> my::FaceLandmark::getAllFaceLandmarks() const
     std::vector<cv::Point> landmarks(FACE_LANDMARKS);
     for (int i = 0; i < FACE_LANDMARKS; ++i)
     {
-        landmarks[i] = getFaceLandmarkAt(i);
+        auto mark = getFaceLandmarkAt(i);
+        landmarks[i] = mark;
+        if (i == 8)
+        {
+            if (mouse_x != 0)
+            {
+                auto diff_x = mark.x - mouse_x;
+                auto diff_y = mark.y - mouse_y;
+
+                if (std::pow(diff_y,2) > 0 && std::pow(diff_x,2) > 0)
+                {
+                    CGEventRef eventGet = CGEventCreate(NULL);
+                    CGPoint cursor = CGEventGetLocation(eventGet);
+                    CFRelease(eventGet);
+                    // std::cout << cursor.x << ", " << cursor.y << "\n\n";
+
+                    CGPoint location = CGPointMake(cursor.x + diff_x*3, cursor.y + diff_y*4);
+                    CGEventRef eventSet = CGEventCreateMouseEvent(NULL, kCGEventMouseMoved, location, kCGMouseButtonLeft);
+                    CGEventSetType(eventSet, kCGEventMouseMoved);
+                    CGEventPost(kCGHIDEventTap, eventSet);
+                    CFRelease(eventSet);
+                }
+            }
+            mouse_x = mark.x;
+            mouse_y = mark.y;
+        }
     }
     return landmarks;
 }
