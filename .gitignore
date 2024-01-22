@@ -42,3 +42,4 @@ Testing/
 
 tensorflowlite/
 !SoDlls/*
+CMakeUserPresets.json

@@ -12,6 +12,8 @@ namespace my {
     */
     class FaceLandmark : public my::FaceDetection {
         public:
+            bool gotRoi {false};
+            cv::Rect roi;
             /*
             Users MUST provide the FOLDER contain BOTH the face_detection_short.tflite 
             and face_landmark.tflite, 
